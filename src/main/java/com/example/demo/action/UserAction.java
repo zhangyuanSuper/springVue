@@ -31,7 +31,7 @@ public class UserAction {
 		Map<String,Object> msg=new HashMap<String,Object>();
 		Users users=biz.queryUserNameWithPWd(name, pwd);
 		if(users!=null) {
-			msg.put("code", "200");
+			msg.put("code111", "200");
 			msg.put("msg", "ok");
 			msg.put("USERS", users);
 			msg.put("token", session.getId());
