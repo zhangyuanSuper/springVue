@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.IUserDao">
+
+	<select id="queryUserNameWithPWd" resultType="com.example.demo.pojo.Users">
+		select * from users where username=#{name} and userpwd=#{pwd}
+	</select>
+
+<select id="queryUserByUserid" resultType="com.example.demo.pojo.Users">
+		select * from users where userid=#{0}
+	</select>
+
+<select id="queryAllUsers" resultType="users">
+		select * from users inner join roleinfo on users.`rid`=roleinfo.`rid`
+	</select>
+	
+	<select id="queryAllRoleUser" resultType="roleuser">
+		select * from roleinfo
+	</select>
+
+	<insert id="addUsers">
+		insert into users(username,userpwd,rid)
+		values(#{username},#{userpwd},#{rid})
+	</insert>
+
+	<update id="updateUsersByUsersId">
+		update users 
+		<set>
+			<if test="username!=null">
+				username=#{username},
+			</if>
+
+			<if test="userpwd!=null">
+				userpwd=#{userpwd},
+			</if>
+
+			<if test="rid!=0">
+				rid=#{rid},
+			</if>
+		</set>
+		where userid = #{userid}
+	</update>
+	
+	<delete id="delUsersByUsersId">
+	delete from users where userid=${userid}
+	</delete>
+
+</mapper>
